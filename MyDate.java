@@ -1,6 +1,7 @@
 package g;
 
-public class MyDate implements DateInterface {
+public class MyDate implements DateInterface
+{
 
 	public int getDay() 
 	{
