@@ -1,3 +1,6 @@
+//JGore
+//Hayden N. Walters
+
 package g;
 
 public class MyDate implements DateInterface
