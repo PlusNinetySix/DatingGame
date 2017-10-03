@@ -34,7 +34,7 @@ public class MyDate implements DateInterface
 
 	public void set(int m, int d, int y, int dow) 
 	{
-		mo = m;
+		mo=m;
 		day=d;
 		yr=y;
 		wk=dow;
@@ -44,15 +44,46 @@ public class MyDate implements DateInterface
 	{
 		day++;
 		wk++;
-		if(day>31) 
+
+		if(mo==2)
 		{
-			mo++;
-			day=1;
+			if((yr % 4 == 0) && (yr % 100 != 0) || (yr % 400 == 0))
+			{
+				if(day>29)
+				{
+					mo++;
+					day=1;
+				}
+			}
+			else
+			{
+				if(day>28)
+				{
+					mo++;
+					day=1;
+				}
+			}
 		}
-		if(mo>11)
+		if(mo==1||mo==3||mo==5||mo==7||mo==8||mo==10||mo==12)
 		{
-			yr++;
-			mo=0;
+			if(day>31)
+			{
+				mo++;
+				if(mo>12)
+				{
+					yr++;
+					mo=1;
+				}
+				day=1;
+			}
+		}
+		if(mo==4||mo==6||mo==9||mo==11)
+		{
+			if(day>30)
+			{
+				mo++;
+				day=1;
+			}
 		}
 		if(wk>6)
 		{
@@ -63,17 +94,31 @@ public class MyDate implements DateInterface
 	public void today() 
 	{
 		
-
 	}
 	
 	public void yesterday() 
 	{
-
+		day--;
+		wk--;
+		if(day<1)
+		{
+			mo--;
+			day=31;
+		}
+		if(mo<0) 
+		{
+			yr--;
+			mo=12;
+		}
+		if(wk<0)
+		{
+			wk=6;
+		}
 	}
 	
 	public String toString()
 	{
-		return days[wk] + " " + months[mo] + " " + day + ", " + yr;
+		return days[wk] + " " + months[mo-1] + " " + day + ", " + yr;
 	}
 
 }
